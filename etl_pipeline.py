@@ -16,9 +16,7 @@ from pyspark.sql.types import StructType, StructField, StringType, IntegerType, 
 spark = SparkSession.builder.master("yarn").appName("mCRM_Loading").enableHiveSupport().getOrCreate()
 
 import sys
-
 import datetime
-
 # Get today's date
 today = datetime.date.today()
 
