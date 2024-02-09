@@ -1,5 +1,3 @@
-
-
 #*****************************************************************************************************
 #*****************************************************************************************************
 #   Author : Anusha Pathiranage
@@ -128,19 +126,8 @@ select * from G3""".format(sdate,edate,sdate,edate))
 
 mon_df_bo.printSchema()
 mon_df_bo.createOrReplaceTempView("prepaid_burnout")
-
-
-
-
-
 pivot_df_bo = mon_df_bo.groupBy("first_act_month").pivot("monthval").sum("arpu_amt").fillna(0)
-
 sorted_df_bo = pivot_df_bo.orderBy(col("first_act_month"))
-
-
-
-
-
 
 mon_df_active = spark.sql("""WITH G1 as (SELECT mobile_no,min(connected_date) as connected_date  , substr(min(connected_date) , 1 ,7) as dateval
                                   
@@ -148,9 +135,7 @@ mon_df_active = spark.sql("""WITH G1 as (SELECT mobile_no,min(connected_date) as
                               WHERE connected_date >= '{}'  
                               AND   connected_date <='{}' 
                               AND   connection_type = 'PRE'  
-                             
-                       
-group by 	mobile_no					  ) , 
+                               group by 	mobile_no					  ) , 
 	
 G2  as (
 
